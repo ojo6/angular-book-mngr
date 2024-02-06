@@ -1,0 +1,31 @@
+:host {
+  padding: 5px;
+  margin: 16px;
+  width: auto;
+}
+
+.table {
+  margin: 5px;
+  margin-right: 4px;
+}
+
+.mat-column-position {
+  width: 15px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-cell {
+  background-color: aqua;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}

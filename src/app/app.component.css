@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.title-container {
+  padding: 9px;
+  background: aquamarine;
+  display: flex;
+  justify-content: space-around;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
