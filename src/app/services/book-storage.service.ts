@@ -35,14 +35,19 @@ export class BookStorageService {
   // store each individual book
   public storeBook(key: string, value: IBook) {
     localStorage.setItem(key, JSON.stringify(value));
+    this.indeces.push(key);
   }
 
-  // public removeBook()
+  public deleteBook(key: string) {
+    console.log('deleting book :', key);
+    localStorage.removeItem(key);
+    this.indeces = this.indeces.filter((ind) => ind !== key);
+    console.log('indeced after deletion', this.indeces);
+  }
 
   private saveInitialData() {
     for (const book of BOOKS) {
       this.storeBook(book.id, book);
-      this.indeces.push(book.id);
     }
   }
 }

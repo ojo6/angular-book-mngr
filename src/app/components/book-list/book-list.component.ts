@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IBook } from '../../books';
 import { BookStorageService } from '../../services/book-storage.service';
 import { Router } from '@angular/router';
+import { needConfirmation } from '../../confirm-dialog.decorator';
 
 @Component({
   selector: 'app-book-list',
@@ -36,6 +37,7 @@ export class BookListComponent {
 
   private getBooks(): void {
     this.books = this.bookStorageService.getBooks();
+    console.log('these are the books:', this.books);
   }
 
   protected goToView(id: any) {
@@ -47,8 +49,10 @@ export class BookListComponent {
     console.log('editing book', book);
   }
 
-  // TODO add here confirmation dialog
-  protected deleteBookEntry(book: any) {
-    console.log('Deleting book', book);
+  @needConfirmation()
+  protected deleteBookEntry(id: string) {
+    console.log('Deleting book', id);
+    this.bookStorageService.deleteBook(id);
+    this.getBooks();
   }
 }
