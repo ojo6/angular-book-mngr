@@ -4,16 +4,16 @@
   width: auto;
 }
 
-.table {
+.mat-mdc-table {
+  /* box-shadow:
+    8px 0px 0px 0px #dcd0c0,
+    0px 8px 0px 0px #b1938b,
+    -8px 0px 0px 0px #4e4e56,
+    0px 0px 0px 8px #da635d,
+    14px 28px 13px 21px rgba(0, 0, 0, 0); */
+  /* background-color: antiquewhite; */
+  padding: 2px;
   margin: 5px;
-  margin-right: 4px;
-}
-
-.mat-column-position > .mat-mdc-cell {
-  width: 15px;
-  border-right: 4px solid currentColor;
-  padding-right: 24px;
-  text-align: center;
 }
 
 .mat-mdc-row .mat-mdc-cell {
@@ -28,4 +28,13 @@
 
 .mat-mdc-row {
   margin-top: 3px;
+}
+
+.mat-mdc-card {
+  padding: 18px;
+  background-color: rgb(223, 179, 97);
+}
+
+.view-icon {
+  color: wheat;
 }

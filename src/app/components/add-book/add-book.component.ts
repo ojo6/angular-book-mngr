@@ -6,8 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { BookStorageService } from '../../services/book-storage.service';
 @Component({
   selector: 'app-add-book',
-  standalone: true,
-  imports: [MatButtonModule, MatInputModule, MatFormFieldModule, FormsModule],
   templateUrl: './add-book.component.html',
   styleUrl: './add-book.component.css',
 })

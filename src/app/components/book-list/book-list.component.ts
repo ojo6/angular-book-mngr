@@ -1,32 +1,20 @@
-import { CommonModule, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
 import { IBook } from '../../books';
-import { BOOKS } from '../../mock-books';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BookStorageService } from '../../services/book-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NgFor,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-  ],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent {
   books: IBook[] = [];
 
-  constructor(private bookStorageService: BookStorageService) {}
+  constructor(
+    private bookStorageService: BookStorageService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -41,15 +29,21 @@ export class BookListComponent {
     'rating',
     'printDate',
     'totalNumberOfBooks',
+    'view',
     'edit',
     'delete',
   ];
 
-  getBooks(): void {
+  private getBooks(): void {
     this.books = this.bookStorageService.getBooks();
   }
 
-  protected editBookEntry(book: IBook) {
+  protected goToView(id: any) {
+    console.log('clicked on row:', id);
+    this.router.navigate(['/view-book/' + id]);
+  }
+
+  protected goToEdit(book: IBook) {
     console.log('editing book', book);
   }
 

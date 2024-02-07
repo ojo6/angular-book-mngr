@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵgetUnknownElementStrictMode } from '@angular/core';
 import { IBook } from '../books';
 import { BOOKS } from '../mock-books';
 
@@ -26,13 +26,18 @@ export class BookStorageService {
     return books;
   }
 
+  getBook(id: string): IBook {
+    // TODO catch if not correct type
+    const book: any = localStorage.getItem(id);
+    return JSON.parse(book);
+  }
+
   // store each individual book
   public storeBook(key: string, value: IBook) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
   // public removeBook()
-
 
   private saveInitialData() {
     for (const book of BOOKS) {

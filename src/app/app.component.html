@@ -1,12 +1,20 @@
 <p>
   <mat-toolbar color="primary">
+    <button
+      mat-icon-button
+      aria-label="Go home"
+      matTooltip="Go to the main list"
+      (click)="goHome()"
+    >
+      <mat-icon>home</mat-icon>
+    </button>
     <span>Book storage manager</span>
     <span class="example-spacer"></span>
     <button
-      routerLink="/add-book"
+      (click)="goToAdd()"
       mat-raised-button
       color="accent"
-      matTooltip="Click to add new book"
+      matTooltip="Add a new book"
     >
       Add new entry
       <mat-icon>add</mat-icon>
