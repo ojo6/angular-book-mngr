@@ -2,6 +2,7 @@ import { IBook } from './books';
 
 export const BOOKS: IBook[] = [
   {
+    id: '11',
     position: 1,
     name: 'The Great Gatsby',
     description: 'A novel by American writer F. Scott Fitzgerald.',
@@ -13,6 +14,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 1000000,
   },
   {
+    id: '12',
     position: 2,
     name: 'To Kill a Mockingbird',
     description: 'A novel by Harper Lee.',
@@ -24,6 +26,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 750000,
   },
   {
+    id: '13',
     position: 3,
     name: '1984',
     description: 'A dystopian novel by George Orwell.',
@@ -35,6 +38,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 500000,
   },
   {
+    id: '14',
     position: 4,
     name: 'The Catcher in the Rye',
     description: 'A novel by J.D. Salinger.',
@@ -46,6 +50,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 900000,
   },
   {
+    id: '15',
     position: 5,
     name: 'Pride and Prejudice',
     description: 'A romantic novel by Jane Austen.',

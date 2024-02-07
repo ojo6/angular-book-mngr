@@ -6,6 +6,8 @@ import { MatTableModule } from '@angular/material/table';
 import { IBook } from '../../books';
 import { BOOKS } from '../../mock-books';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BookStorageService } from '../../services/book-storage.service';
 
 @Component({
   selector: 'app-book-list',
@@ -22,26 +24,36 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent {
-  dataSource = BOOKS;
+  books: IBook[] = [];
+
+  constructor(private bookStorageService: BookStorageService) {}
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.getBooks();
+  }
+
   displayedColumns: string[] = [
     'position',
     'name',
-    'description',
     'author',
     'rating',
-    'bookWebsiteUrl',
-    'numberOfPages',
     'printDate',
     'totalNumberOfBooks',
     'edit',
     'delete',
   ];
 
+  getBooks(): void {
+    this.books = this.bookStorageService.getBooks();
+  }
+
   protected editBookEntry(book: IBook) {
     console.log('editing book', book);
   }
 
-  //TODO add here confirmation dialog
+  // TODO add here confirmation dialog
   protected deleteBookEntry(book: any) {
     console.log('Deleting book', book);
   }

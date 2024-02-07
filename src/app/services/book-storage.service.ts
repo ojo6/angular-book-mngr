@@ -1,33 +1,43 @@
 import { Injectable } from '@angular/core';
-import { StorageMap } from '@ngx-pwa/local-storage';
-import { Observable, ReplaySubject } from 'rxjs';
+import { IBook } from '../books';
+import { BOOKS } from '../mock-books';
 
+export const STORE_KEY_VALUE: string = 'myBookList';
 @Injectable({
   providedIn: 'root',
 })
 export class BookStorageService {
-  constructor(private storage: StorageMap) {}
+  public indeces: string[] = [];
 
-  public saveValue(value: string) {
-    this.storage.set('myKey', value).subscribe(() => {
-      console.log('Value saved to local storage - ', value);
-    });
+  constructor() {
+    this.saveInitialData(); // to have data from the start
   }
 
-  public getValue(): Observable<any> {
-    return this.storage.get('myKey');
+  public getBooks(): IBook[] {
+    let books = [];
+    for (const i of this.indeces) {
+      const objString: any = localStorage.getItem(i);
+      if (typeof objString === null) {
+        console.error('Book with key ', i, 'is missing from storage!');
+      } else {
+        books.push(JSON.parse(objString));
+      }
+    }
+    return books;
   }
 
-  fetchValue(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.getValue().subscribe(
-        (data) => {
-          resolve(data);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
+  // store each individual book
+  public storeBook(key: string, value: IBook) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  // public removeBook()
+
+
+  private saveInitialData() {
+    for (const book of BOOKS) {
+      this.storeBook(book.id, book);
+      this.indeces.push(book.id);
+    }
   }
 }

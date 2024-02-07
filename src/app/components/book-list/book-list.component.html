@@ -1,5 +1,5 @@
 <div class="table-container">
-  <table mat-table [dataSource]="dataSource" class="table">
+  <table mat-table [dataSource]="books" class="table">
     <!-- Note that these columns can be defined in any order.
        The actual rendered columns are set as a property on the row definition -->
 
@@ -15,12 +15,6 @@
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
-    <!-- Description Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef>Description</th>
-      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-    </ng-container>
-
     <!-- Author Column -->
     <ng-container matColumnDef="author">
       <th mat-header-cell *matHeaderCellDef>Author</th>
@@ -31,12 +25,6 @@
     <ng-container matColumnDef="rating">
       <th mat-header-cell *matHeaderCellDef>Rating</th>
       <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
-    </ng-container>
-
-    <!-- Book Website URL Column -->
-    <ng-container matColumnDef="bookWebsiteUrl">
-      <th mat-header-cell *matHeaderCellDef>Book Website URL</th>
-      <td mat-cell *matCellDef="let element">{{ element.bookWebsiteUrl }}</td>
     </ng-container>
 
     <!-- Number of Pages Column -->

@@ -9,23 +9,23 @@
   margin-right: 4px;
 }
 
-.mat-column-position {
+.mat-column-position > .mat-mdc-cell {
   width: 15px;
-  border-right: 1px solid currentColor;
+  border-right: 4px solid currentColor;
   padding-right: 24px;
   text-align: center;
 }
 
-.mat-cell {
-  background-color: aqua;
-}
-
 .mat-mdc-row .mat-mdc-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
+  border: 1px solid white;
+  /* border-radius: 12px ; */
   cursor: pointer;
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
-  border-color: currentColor;
+  border-color: greenyellow;
+}
+
+.mat-mdc-row {
+  margin-top: 3px;
 }

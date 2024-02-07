@@ -1,4 +1,5 @@
 export interface IBook {
+  id: string;
   position: number;
   name: string;
   description: string;
