@@ -1,8 +1,2 @@
-<mat-label>Input</mat-label>
-<input matInput placeholder="value" [(ngModel)]="writtenValue" />
-
-<!-- <button mat-button color="accent" (click)="saveLocal()">Save</button>
-<button mat-button color="primary" (click)="retrieveLocal()">Retrieve</button> -->
-
-<div>Written : {{ writtenValue }}</div>
-<div>Retrieved: {{ retrievedValue }}</div>
+<label for="name">Name: </label>
+<input id="name" type="text" [formControl]="name" />

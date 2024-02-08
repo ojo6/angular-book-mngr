@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.book-card {
+  max-width: 800px;
+  background-color: #d1c4e9; /* Light Purple */
+}
+
+.mat-mdc-card-subtitle,
+.mat-mdc-card-title {
+  color: #512da8; /* Dark Purple */
+}
+
+.details {
+  margin-top: 10px;
+}
+
+.details p {
+  margin-bottom: 5px;
+}
+
+.mat-mdc-card-actions {
+  justify-content: flex-start;
+}
+
+.mat-mdc-button {
+  color: #512da8; /* Dark Purple */
+}
+
+.descr-card {
+  margin-top: 20px;
+  background-color: #69f0ae;
+  padding: 18px;
+}

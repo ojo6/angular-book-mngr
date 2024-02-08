@@ -12,8 +12,4 @@ export class AppComponent {
   goHome() {
     this.router.navigate(['/book-list']);
   }
-
-  goToAdd() {
-    this.router.navigate(['/add-book']);
-  }
 }

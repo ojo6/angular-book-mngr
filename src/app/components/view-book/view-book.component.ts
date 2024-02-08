@@ -9,22 +9,58 @@ import { BookStorageService } from '../../services/book-storage.service';
   styleUrl: './view-book.component.css',
 })
 export class ViewBookComponent implements OnInit {
-  book: IBook | undefined;
-  bookSTR: string = 'nothing';
+  book!: IBook;
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly bookService: BookStorageService,
+    private readonly bookStorageService: BookStorageService,
   ) {}
 
   ngOnInit(): void {
+    console.log('before getbook call');
     this.getBook();
+    console.log('after getbook call');
   }
 
-  getBook() {
+  public getBook() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.book = this.bookService.getBook(id as string); // TODO typeguard
+
+    this.bookStorageService.getBook(id as string).subscribe({
+      next: (value) => {
+        this.book = value;
+        console.log('next:', value);
+      },
+      error: (err) => console.log('error:', err),
+      complete: () => console.log('the end'),
+    });
     console.log('this is the book,', this.book);
-    this.bookSTR = JSON.stringify(this.book);
   }
 }
+
+// getBook() {
+//   // TODO add some type guard?
+
+//   const id = this.route.snapshot.paramMap.get('id');
+//   this.bookStorageService.getBook(id as string).subscribe((book) => {
+//     this.book = book;
+//     console.log('inside subscribe');
+//   });
+//   console.log('this is the book,', this.book);
+// }
+
+// getBook(id: string): Observable<IBook> {
+//   // TODO catch if not correct type
+//   // const book: any = localStorage.getItem(id);
+//   // const parsedBook: IBook = JSON.parse(book);
+//   // console.log('inside service of getBook');
+//   // return of(parsedBook);
+//   return new Observable<IBook>((observer) => {
+//     setTimeout(() => {
+//       const book: any = localStorage.getItem(id);
+//       const parsedBook: IBook = JSON.parse(book);
+//       observer.next(parsedBook);
+//       // observer.complete();
+//       console.log('inside service of getBook');
+//     }, 1000);
+//   });
+// }

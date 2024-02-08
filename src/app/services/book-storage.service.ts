@@ -1,6 +1,7 @@
 import { Injectable, ɵgetUnknownElementStrictMode } from '@angular/core';
 import { IBook } from '../books';
 import { BOOKS } from '../mock-books';
+import { Observable, concatMap, from, of } from 'rxjs';
 
 export const STORE_KEY_VALUE: string = 'myBookList';
 @Injectable({
@@ -13,23 +14,16 @@ export class BookStorageService {
     this.saveInitialData(); // to have data from the start
   }
 
-  public getBooks(): IBook[] {
-    let books = [];
-    for (const i of this.indeces) {
-      const objString: any = localStorage.getItem(i);
-      if (typeof objString === null) {
-        console.error('Book with key ', i, 'is missing from storage!');
-      } else {
-        books.push(JSON.parse(objString));
-      }
-    }
-    return books;
+  public getBooks(): Observable<IBook> {
+    return from(this.indeces).pipe(
+      concatMap((id) => this.getBook(id as string)),
+    );
   }
 
-  getBook(id: string): IBook {
-    // TODO catch if not correct type
+  public getBook(id: string): Observable<IBook> {
     const book: any = localStorage.getItem(id);
-    return JSON.parse(book);
+    const parsedBook: IBook = JSON.parse(book);
+    return of(parsedBook);
   }
 
   // store each individual book

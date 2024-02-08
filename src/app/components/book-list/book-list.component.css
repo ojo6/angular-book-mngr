@@ -1,40 +1,40 @@
 :host {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
   padding: 5px;
   margin: 16px;
-  width: auto;
+  /* max-width: fit-content; */
 }
 
 .mat-mdc-table {
-  /* box-shadow:
-    8px 0px 0px 0px #dcd0c0,
-    0px 8px 0px 0px #b1938b,
-    -8px 0px 0px 0px #4e4e56,
-    0px 0px 0px 8px #da635d,
-    14px 28px 13px 21px rgba(0, 0, 0, 0); */
-  /* background-color: antiquewhite; */
   padding: 2px;
   margin: 5px;
-}
-
-.mat-mdc-row .mat-mdc-cell {
-  border: 1px solid white;
-  /* border-radius: 12px ; */
-  cursor: pointer;
-}
-
-.mat-mdc-row:hover .mat-mdc-cell {
-  border-color: greenyellow;
 }
 
 .mat-mdc-row {
   margin-top: 3px;
 }
 
-.mat-mdc-card {
-  padding: 18px;
-  background-color: rgb(223, 179, 97);
+.header-card {
+  padding: 5px;
+  background-color: #9d55bbf2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .view-icon {
   color: wheat;
+}
+
+.spacer {
+  height: 20px;
+}
+
+.add-button {
+  margin-inline-end: 2%;
 }

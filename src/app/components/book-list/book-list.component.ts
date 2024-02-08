@@ -18,8 +18,6 @@ export class BookListComponent {
   ) {}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.getBooks();
   }
 
@@ -35,24 +33,31 @@ export class BookListComponent {
     'delete',
   ];
 
-  private getBooks(): void {
-    this.books = this.bookStorageService.getBooks();
-    console.log('these are the books:', this.books);
+  public getBooks() {
+    this.bookStorageService.getBooks().subscribe((book) => {
+      console.log('MULTIPLE ___ Next:', book);
+      this.books.push(book);
+    });
   }
 
-  protected goToView(id: any) {
+  protected goToView(id: string) {
     console.log('clicked on row:', id);
     this.router.navigate(['/view-book/' + id]);
   }
 
-  protected goToEdit(book: IBook) {
-    console.log('editing book', book);
+  protected goToEdit(id: string) {
+    this.router.navigate(['/edit-book/' + id]);
+  }
+
+  goToAdd() {
+    this.router.navigate(['/add-book']);
   }
 
   @needConfirmation()
   protected deleteBookEntry(id: string) {
     console.log('Deleting book', id);
     this.bookStorageService.deleteBook(id);
+    this.books = [];
     this.getBooks();
   }
 }
