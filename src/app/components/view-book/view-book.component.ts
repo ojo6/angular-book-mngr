@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IBook } from '../../book-interface';
 import { BookStorageService } from '../../services/book-storage.service';
@@ -10,6 +10,7 @@ import { BookStorageService } from '../../services/book-storage.service';
 })
 export class ViewBookComponent implements OnInit {
   book!: IBook;
+  @Input() id = '';
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -17,50 +18,18 @@ export class ViewBookComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('before getbook call');
-    this.getBook();
-    console.log('after getbook call');
+    if (this.id) {
+      this.setSelectedBookId(this.id);
+    }
   }
 
-  public getBook() {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    this.bookStorageService.getBook(id as string).subscribe({
+  public setSelectedBookId(id: string) {
+    this.bookStorageService.getBook(id).subscribe({
       next: (value) => {
         this.book = value;
         console.log('next:', value);
       },
       error: (err) => console.log('error:', err),
-      complete: () => console.log('the end'),
     });
-    console.log('this is the book,', this.book);
   }
 }
-
-// getBook() {
-//   // TODO add some type guard?
-
-//   const id = this.route.snapshot.paramMap.get('id');
-//   this.bookStorageService.getBook(id as string).subscribe((book) => {
-//     this.book = book;
-//     console.log('inside subscribe');
-//   });
-//   console.log('this is the book,', this.book);
-// }
-
-// getBook(id: string): Observable<IBook> {
-//   // TODO catch if not correct type
-//   // const book: any = localStorage.getItem(id);
-//   // const parsedBook: IBook = JSON.parse(book);
-//   // console.log('inside service of getBook');
-//   // return of(parsedBook);
-//   return new Observable<IBook>((observer) => {
-//     setTimeout(() => {
-//       const book: any = localStorage.getItem(id);
-//       const parsedBook: IBook = JSON.parse(book);
-//       observer.next(parsedBook);
-//       // observer.complete();
-//       console.log('inside service of getBook');
-//     }, 1000);
-//   });
-// }
