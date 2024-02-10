@@ -14,14 +14,23 @@
         <p>
           <strong>Total Number of Books:</strong> {{ book.totalNumberOfBooks }}
         </p>
-        <mat-card-content class="descr-card">
-          <mat-card-title>Description</mat-card-title>
-          <p>{{ book.description }}</p></mat-card-content
-        >
+        <!-- Description card inside the main card -->
+        <mat-card class="descr-card">
+          <mat-card-header>
+            <mat-card-title>Description</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ book.description }}</p>
+          </mat-card-content>
+        </mat-card>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <a mat-button href="{{ book.bookWebsiteUrl }}" target="_blank"
+      <a
+        mat-flat-button
+        color="primary"
+        href="{{ book.bookWebsiteUrl }}"
+        target="_blank"
         >Visit Website</a
       >
     </mat-card-actions>

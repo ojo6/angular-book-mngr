@@ -26,10 +26,6 @@
   justify-content: flex-start;
 }
 
-.mat-mdc-button {
-  color: #512da8; /* Dark Purple */
-}
-
 .descr-card {
   margin-top: 20px;
   background-color: #69f0ae;
