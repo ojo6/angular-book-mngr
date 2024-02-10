@@ -1,5 +1,5 @@
 import { Injectable, ɵgetUnknownElementStrictMode } from '@angular/core';
-import { IBook } from '../books';
+import { IBook } from '../book-interface';
 import { BOOKS } from '../mock-books';
 import { Observable, concatMap, from, of } from 'rxjs';
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IBook } from '../../books';
+import { IBook } from '../../book-interface';
 import { BookStorageService } from '../../services/book-storage.service';
 import { Router } from '@angular/router';
 import { needConfirmation } from '../../confirm-dialog.decorator';

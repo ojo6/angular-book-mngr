@@ -4,7 +4,7 @@ export interface IBook {
   name: string;
   description: string;
   author: string;
-  rating: number;
+  rating: 1 | 2 | 3 | 4 | 5;
   bookWebsiteUrl: string;
   numberOfPages: number;
   printDate: Date;
