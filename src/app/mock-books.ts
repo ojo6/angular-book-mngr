@@ -4,7 +4,12 @@ export const BOOKS: IBook[] = [
   {
     id: 11,
     name: 'The Great Gatsby',
-    description: `The Great Gatsby is a novel by American writer F. Scott Fitzgerald. Set in the Jazz Age on Long Island, the novel depicts narrator Nick Carraway's interactions with mysterious millionaire Jay Gatsby and Gatsby's obsession with Nick's cousin Daisy Buchanan. It explores themes of decadence, idealism, resistance to change, social upheaval, and excess.`,
+    description: `<p><strong>The Great Gatsby</strong> is a novel by F. Scott Fitzgerald, set in the Jazz Age. It explores themes of <strong>decadence</strong> and <strong>idealism</strong> through <strong>Nick Carraway's</strong> encounters with the enigmatic <strong>Jay Gatsby</strong>.</p>
+    <p>With insightful prose, Fitzgerald portrays a world of social upheaval and excess, where characters pursue dreams that ultimately lead to disillusionment.</p>
+    <ul>
+      <li>The novel reflects the societal changes and moral decay of the 1920s.</li>
+      <li>Fitzgerald's rich symbolism and vivid imagery immerse readers in the extravagant world of the American Dream.</li>
+    </ul>`,
     author: 'F. Scott Fitzgerald',
     rating: 4,
     bookWebsiteUrl: 'https://en.wikipedia.org/wiki/The_Great_Gatsby',
@@ -15,7 +20,12 @@ export const BOOKS: IBook[] = [
   {
     id: 12,
     name: 'To Kill a Mockingbird',
-    description: `To Kill a Mockingbird is a novel by Harper Lee published in 1960. It was immediately successful, winning the Pulitzer Prize, and has become a classic of modern American literature. The plot and characters are loosely based on Lee's observations of her family, her neighbors, and an event that occurred near her hometown of Monroeville, Alabama, in 1936, when she was ten.`,
+    description: `<p><strong>To Kill a Mockingbird</strong> by Harper Lee is a Pulitzer Prize-winning novel. Set in Alabama, it intertwines themes of <strong>racial injustice</strong> with the innocence of childhood.</p>
+    <p>Through <strong>Scout Finch's</strong> eyes, Lee offers a poignant portrayal of societal issues, illustrating the complexities of human morality and the importance of empathy.</p>
+    <ul>
+      <li>The novel challenges racial prejudice and the concept of 'otherness'.</li>
+      <li>Lee's use of Southern Gothic elements adds depth to the narrative, capturing the essence of the Deep South.</li>
+    </ul>`,
     author: 'Harper Lee',
     rating: 4,
     bookWebsiteUrl: 'https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird',
@@ -26,7 +36,12 @@ export const BOOKS: IBook[] = [
   {
     id: 13,
     name: '1984',
-    description: `1984 is a dystopian novel by George Orwell published in 1949. The novel is set in Airstrip One, formerly Great Britain, a province of the superstate Oceania. Airstrip One is a world of perpetual war, omnipresent government surveillance, and public manipulation. The novel's protagonist, Winston Smith, is a citizen of Oceania, employed as an editor (of propaganda) at the Ministry of Truth.`,
+    description: `<p><strong>1984</strong> by George Orwell is a dystopian masterpiece. Set in Airstrip One, it delves into themes of <strong>totalitarianism</strong> and government surveillance, presenting a chilling vision of a controlled society.</p>
+    <p>Orwell's portrayal of <strong>Winston Smith's</strong> struggle against oppression is a stark warning about the dangers of authoritarianism and the erosion of individual freedom.</p>
+    <ul>
+      <li>The novel explores the manipulation of truth and the power of propaganda.</li>
+      <li>Orwell's bleak depiction of a surveillance state remains relevant in today's age of technology.</li>
+    </ul>`,
     author: 'George Orwell',
     rating: 5,
     bookWebsiteUrl: 'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four',
@@ -37,7 +52,8 @@ export const BOOKS: IBook[] = [
   {
     id: 14,
     name: 'The Catcher in the Rye',
-    description: `The Catcher in the Rye is a novel by J. D. Salinger, first published in 1951. It is notable for its themes of teenage angst, alienation, and rebellion. The novel's protagonist, Holden Caulfield, has become an icon for teenage rebellion. The novel also deals with complex issues of identity, belonging, loss, and connection.`,
+    description: `<p><strong>The Catcher in the Rye</strong> by J.D. Salinger captures teenage angst and rebellion. Through <strong>Holden Caulfield's</strong> journey, Salinger explores themes of identity and loss, offering a raw and honest portrayal of adolescence.</p>
+    <p>The novel remains a timeless reflection of the struggles of growing up and the search for authenticity in a conformist society.</p>`,
     author: 'J.D. Salinger',
     rating: 3,
     bookWebsiteUrl: 'https://en.wikipedia.org/wiki/The_Catcher_in_the_Rye',
@@ -48,7 +64,8 @@ export const BOOKS: IBook[] = [
   {
     id: 15,
     name: 'Pride and Prejudice',
-    description: `Pride and Prejudice is a romantic novel by Jane Austen, first published in 1813. The story follows the main character, Elizabeth Bennet, as she deals with issues of manners, upbringing, morality, education, and marriage in the society of the landed gentry of early 19th-century England. It is one of the most popular novels in the English language.`,
+    description: `<p><strong>Pride and Prejudice</strong> by Jane Austen is a timeless romance. It follows <strong>Elizabeth Bennet's</strong> journey through Regency-era England, navigating issues of love and societal expectations with wit and grace.</p>
+    <p>Austen's keen observations of human nature and sharp social commentary make this novel a classic portrayal of the complexities of relationships and the pursuit of happiness.</p>`,
     author: 'Jane Austen',
     rating: 2,
     bookWebsiteUrl: 'https://en.wikipedia.org/wiki/Pride_and_Prejudice',
@@ -60,7 +77,8 @@ export const BOOKS: IBook[] = [
     id: 16,
     name: 'Albinuța',
     author: 'Grigore Vieru',
-    description: `“Albinuța” (The Little Bee) is a beloved children's poem written by Grigore Vieru, one of the most celebrated poets from Moldova. The poem tells the story of a little bee as it goes about its day, collecting nectar and spreading joy through the flowers. Through simple and lyrical language, Vieru captures the beauty of nature and the innocence of childhood.`,
+    description: `<p>“Albinuța” (The Little Bee) is a beloved children's poem by Grigore Vieru. It whimsically portrays the adventures of a little bee as it spreads joy among flowers, celebrating the wonders of nature and the innocence of childhood.</p>
+    <p>Vieru's lyrical language and vivid imagery capture the imagination, making this poem a timeless treasure for readers of all ages.</p>`,
     rating: 5,
     bookWebsiteUrl: 'https://ro.wikipedia.org/wiki/Grigore_Vieru',
     numberOfPages: 12,
