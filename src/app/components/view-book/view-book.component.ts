@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IBook } from '../../book-interface';
 import { BookStorageService } from '../../services/book-storage.service';
 
+
 @Component({
   selector: 'app-view-book',
   templateUrl: './view-book.component.html',
@@ -19,11 +20,11 @@ export class ViewBookComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.id) {
-      this.setSelectedBookId(this.id);
+      this.setSelectedBookId(parseInt(this.id, 10));
     }
   }
 
-  public setSelectedBookId(id: string) {
+  public setSelectedBookId(id: number) {
     this.bookStorageService.getBook(id).subscribe({
       next: (value) => {
         this.book = value;

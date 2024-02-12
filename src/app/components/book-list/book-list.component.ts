@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IBook } from '../../book-interface';
-import { BookStorageService } from '../../services/book-storage.service';
 import { Router } from '@angular/router';
 import { needConfirmation } from '../../confirm-dialog.decorator';
+import { BookStorageService } from '../../services/book-storage.service';
 
 @Component({
   selector: 'app-book-list',
@@ -35,18 +35,17 @@ export class BookListComponent {
 
   public getBooks() {
     this.bookStorageService.getBooks().subscribe((book) => {
-      console.log('MULTIPLE ___ Next:', book);
       this.books.push(book);
     });
   }
 
-  protected goToView(id: string) {
+  protected goToView(id: number) {
     console.log('clicked on row:', id);
-    this.router.navigate(['/view-book/' + id]);
+    this.router.navigate(['/view-book/' + id.toString()]);
   }
 
-  protected goToEdit(id: string) {
-    this.router.navigate(['/edit-book/' + id]);
+  protected goToEdit(id: number) {
+    this.router.navigate(['/edit-book/' + id.toString()]);
   }
 
   goToAdd() {
@@ -54,10 +53,11 @@ export class BookListComponent {
   }
 
   @needConfirmation()
-  protected deleteBookEntry(id: string) {
+  protected deleteBookEntry(id: number) {
     console.log('Deleting book', id);
     this.bookStorageService.deleteBook(id);
     this.books = [];
     this.getBooks();
+    console.log('this ar ethe books', this.books);
   }
 }

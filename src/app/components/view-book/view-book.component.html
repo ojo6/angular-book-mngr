@@ -8,31 +8,46 @@
     <mat-card-content>
       <mat-divider></mat-divider>
       <div class="details">
-        <p><strong>Rating:</strong> {{ book.rating }}</p>
-        <p><strong>Number of Pages:</strong> {{ book.numberOfPages }}</p>
-        <p><strong>Print Date:</strong> {{ book.printDate | date }}</p>
-        <p>
+        <!-- print date  -->
+        <div class="details-field" *ngIf="book.printDate"></div>
+        <strong>Print Date:</strong> {{ book.printDate | date }}
+
+        <!-- rating -->
+        <div class="details-field" *ngIf="book.rating! > 0">
+          <strong>Rating:</strong> {{ book.rating }}
+        </div>
+
+        <!-- num of pages -->
+        <div><strong>Number of Pages:</strong> {{ book.numberOfPages }}</div>
+
+        <!-- number of books  -->
+        <div class="details-field">
           <strong>Total Number of Books:</strong> {{ book.totalNumberOfBooks }}
-        </p>
-        <!-- Description card inside the main card -->
-        <mat-card class="descr-card">
-          <mat-card-header>
-            <mat-card-title>Description</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p>{{ book.description }}</p>
-          </mat-card-content>
-        </mat-card>
+        </div>
       </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <a
-        mat-flat-button
-        color="primary"
-        href="{{ book.bookWebsiteUrl }}"
-        target="_blank"
-        >Visit Website</a
+      <!-- book website button  -->
+      <div
+        class="details-field url-button"
+        *ngIf="book.bookWebsiteUrl || book.bookWebsiteUrl?.length == 0"
       >
-    </mat-card-actions>
+        <a
+          mat-flat-button
+          color="primary"
+          href="{{ book.bookWebsiteUrl }}"
+          target="_blank"
+          >Visit Website</a
+        >
+      </div>
+
+      <!-- Description card inside the main card -->
+      <mat-card class="descr-card">
+        <mat-card-header>
+          <mat-card-title>Description</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div>{{ book.description }}</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
   </mat-card>
 </div>

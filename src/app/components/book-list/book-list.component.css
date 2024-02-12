@@ -38,3 +38,10 @@
 .add-button {
   margin-inline-end: 2%;
 }
+
+.no-books-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: large;
+}

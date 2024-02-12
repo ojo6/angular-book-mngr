@@ -2,8 +2,7 @@ import { IBook } from './book-interface';
 
 export const BOOKS: IBook[] = [
   {
-    id: '11',
-    position: 1,
+    id: 11,
     name: 'The Great Gatsby',
     description: `The Great Gatsby is a novel by American writer F. Scott Fitzgerald. Set in the Jazz Age on Long Island, the novel depicts narrator Nick Carraway's interactions with mysterious millionaire Jay Gatsby and Gatsby's obsession with Nick's cousin Daisy Buchanan. It explores themes of decadence, idealism, resistance to change, social upheaval, and excess.`,
     author: 'F. Scott Fitzgerald',
@@ -14,8 +13,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 43,
   },
   {
-    id: '12',
-    position: 2,
+    id: 12,
     name: 'To Kill a Mockingbird',
     description: `To Kill a Mockingbird is a novel by Harper Lee published in 1960. It was immediately successful, winning the Pulitzer Prize, and has become a classic of modern American literature. The plot and characters are loosely based on Lee's observations of her family, her neighbors, and an event that occurred near her hometown of Monroeville, Alabama, in 1936, when she was ten.`,
     author: 'Harper Lee',
@@ -26,8 +24,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 5,
   },
   {
-    id: '13',
-    position: 3,
+    id: 13,
     name: '1984',
     description: `1984 is a dystopian novel by George Orwell published in 1949. The novel is set in Airstrip One, formerly Great Britain, a province of the superstate Oceania. Airstrip One is a world of perpetual war, omnipresent government surveillance, and public manipulation. The novel's protagonist, Winston Smith, is a citizen of Oceania, employed as an editor (of propaganda) at the Ministry of Truth.`,
     author: 'George Orwell',
@@ -38,8 +35,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 44,
   },
   {
-    id: '14',
-    position: 4,
+    id: 14,
     name: 'The Catcher in the Rye',
     description: `The Catcher in the Rye is a novel by J. D. Salinger, first published in 1951. It is notable for its themes of teenage angst, alienation, and rebellion. The novel's protagonist, Holden Caulfield, has become an icon for teenage rebellion. The novel also deals with complex issues of identity, belonging, loss, and connection.`,
     author: 'J.D. Salinger',
@@ -50,8 +46,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 12,
   },
   {
-    id: '15',
-    position: 5,
+    id: 15,
     name: 'Pride and Prejudice',
     description: `Pride and Prejudice is a romantic novel by Jane Austen, first published in 1813. The story follows the main character, Elizabeth Bennet, as she deals with issues of manners, upbringing, morality, education, and marriage in the society of the landed gentry of early 19th-century England. It is one of the most popular novels in the English language.`,
     author: 'Jane Austen',
@@ -62,8 +57,7 @@ export const BOOKS: IBook[] = [
     totalNumberOfBooks: 7,
   },
   {
-    id: '16',
-    position: 6,
+    id: 16,
     name: 'Albinuța',
     author: 'Grigore Vieru',
     description: `“Albinuța” (The Little Bee) is a beloved children's poem written by Grigore Vieru, one of the most celebrated poets from Moldova. The poem tells the story of a little bee as it goes about its day, collecting nectar and spreading joy through the flowers. Through simple and lyrical language, Vieru captures the beauty of nature and the innocence of childhood.`,

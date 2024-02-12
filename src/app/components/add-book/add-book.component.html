@@ -1,2 +1,226 @@
-<label for="name">Name: </label>
-<input id="name" type="text" [formControl]="name" />
+<div class="container">
+  <mat-card class="book-card">
+    <mat-card-header>
+      <mat-card-title>Add a new book</mat-card-title>
+      <mat-card-subtitle>Fill in the details and click SAVE</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="details">
+        <button (click)="onClick()">log validity</button>
+        <!-- Title -->
+        <form
+          #formElement
+          [formGroup]="bookForm"
+          class="form-container"
+          (ngSubmit)="onSubmit()"
+        >
+          <mat-form-field [floatLabel]="'always'">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="name" placeholder="Title" />
+            <!-- Only check if invalid, not specific error -->
+            @if (bookForm.get("name")!.invalid) {
+              <mat-error>{{ getFieldRequiredMessage }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Author -->
+          <mat-form-field [floatLabel]="'always'">
+            <mat-label>Author</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="author"
+              placeholder="Author"
+              [matAutocomplete]="auto"
+            />
+            <!-- Only check if invalid, not specific error -->
+            @if (bookForm.get("name")?.invalid) {
+              <mat-error>{{ getFieldRequiredMessage }}</mat-error>
+            }
+            <mat-autocomplete #auto="matAutocomplete">
+              @for (author of filteredAuthors | async; track author) {
+                <mat-option [value]="author">{{ author }}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <!-- Number of pages -->
+          <mat-form-field [floatLabel]="'always'">
+            <mat-label>Num. of pages</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="numberOfPages"
+              placeholder="Number of Pages"
+            />
+            <!-- Check for specific errors  -->
+            @if (bookForm.get("numberOfPages")!.errors?.["min"]) {
+              <mat-error>Value must be at least 1</mat-error>
+            }
+            @if (bookForm.get("numberOfPages")!.errors?.["required"]) {
+              <mat-error>{{ getFieldRequiredMessage }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Number of books -->
+          <mat-form-field [floatLabel]="'always'">
+            <mat-label>Number of books</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="totalNumber"
+              placeholder="Total Number"
+            />
+            <!-- Only check if invalid, not specific error -->
+            @if (bookForm.get("totalNumber")?.invalid) {
+              <mat-error>{{ getFieldRequiredMessage }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Print date -->
+          <mat-form-field>
+            <mat-label>Print date</mat-label>
+            <input
+              matInput
+              [max]="maxDate"
+              [matDatepicker]="picker"
+              formControlName="printDate"
+              placeholder="Print Date"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <!-- Check for specific errors  -->
+            @if (bookForm.get("printDate")!.errors?.["matDatepickerParse"]) {
+              <mat-error>Invalid date format. Please use: MM/DD/YYYY</mat-error>
+            }
+            @if (bookForm.get("printDate")!.errors?.["badDate"]) {
+              <mat-error>Must be a date in past or current date</mat-error>
+            }
+            <mat-datepicker-toggle
+              matPrefix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <!-- Book website URL -->
+          <mat-form-field [floatLabel]="'always'">
+            <mat-label>Book website URL</mat-label>
+            <input
+              matInput
+              formControlName="bookWebsiteUrl"
+              placeholder="Book Website URL"
+            />
+            @if (bookForm.get("bookWebsiteUrl")!.errors?.["badURL"]) {
+              <mat-error>Invalid URL format.</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Rating -->
+          <div class="rating-form-field mdc-text-field mdc-text-field--filled">
+            <span id="rating-label">Rating: </span>
+            <div class="stars-container" id="rating">
+              <span
+                [ngClass]="{ checked: selectedRating >= 1 }"
+                (click)="setRating(1)"
+              >
+                <mat-icon>star</mat-icon>
+              </span>
+              <span
+                [ngClass]="{ checked: selectedRating >= 2 }"
+                (click)="setRating(2)"
+              >
+                <mat-icon>star</mat-icon>
+              </span>
+              <span
+                [ngClass]="{ checked: selectedRating >= 3 }"
+                (click)="setRating(3)"
+              >
+                <mat-icon>star</mat-icon>
+              </span>
+              <span
+                [ngClass]="{ checked: selectedRating >= 4 }"
+                (click)="setRating(4)"
+              >
+                <mat-icon>star</mat-icon>
+              </span>
+              <span
+                [ngClass]="{ checked: selectedRating >= 5 }"
+                (click)="setRating(5)"
+              >
+                <mat-icon>star</mat-icon>
+              </span>
+            </div>
+            <button
+              type="button"
+              mat-mini-fab
+              color="warn"
+              matTooltip="Reset rating to 0"
+              (click)="resetRating()"
+            >
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
+
+          <!-- Description -->
+          <mat-card-content class="descr-card">
+            <mat-card-title class="descr-title">Description</mat-card-title>
+            <!-- <editor
+              apiKey="vplln08t7v2xxcw6r2nu3gdebhjchuevrpeywp68efb5fq14"
+              [formControl]="bookForm.controls.description"
+              (onInit)="handleEditorInit($event)"
+              [init]="{
+                base_url: '/tinymce',
+                suffix: '.min',
+                plugins: 'lists link image table code help wordcount',
+                min_height: 150,
+                menubar: false,
+                placeholder: 'Description of the book'
+              }"
+            ></editor> -->
+            <div class="mat-form-field-subscript-wrapper">
+              <mat-error
+                *ngIf="bookForm.get('description')?.hasError('minlength')"
+              >
+                Your post exceeds exceeds the character limit
+                {{
+                  bookForm.get("description")?.getError("minlength")
+                    .actualLength
+                }}
+                /
+                {{
+                  bookForm.get("description")?.getError("minlength")
+                    .requiredLength
+                }}
+              </mat-error>
+              <!-- <mat-error
+                *ngIf="
+                  bookForm.controls.description.touched &&
+                  bookForm.controls.description.hasError('required')
+                "
+              >
+                This form is required
+              </mat-error> -->
+            </div>
+          </mat-card-content>
+
+          <!-- Form actions -->
+          <span class="actions-btn-container">
+            <button
+              mat-raised-button
+              id="submit-button"
+              type="submit"
+              [disabled]="bookForm.invalid"
+              matTooltip="Submit form to save the entry"
+              color="accent"
+            >
+              Submit
+            </button>
+            <div id="buttons-spacer"></div>
+            <button mat-raised-button type="reset">Reset</button></span
+          >
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

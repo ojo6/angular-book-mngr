@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: ce;
+}
+
+.book-card {
+  flex: 1;
+  max-width: 800px;
+  background-color: #d1c4e9;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-mdc-form-field {
+  margin-top: 5px;
+}
+
+.mat-mdc-card-subtitle,
+.mat-mdc-card-title {
+  color: #512da8;
+}
+
+/* RATING */
+
+.rating-form-field {
+  display: flex;
+  align-items: center;
+  margin-top: 7px;
+  margin-bottom: 17px;
+}
+
+#rating-label {
+  margin-right: 16px;
+  font-size: var(--mat-card-title-text-size);
+  color: var(--mdc-filled-text-field-input-text-color);
+}
+
+.rating-form-field .stars-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.rating-form-field .stars-container span mat-icon {
+  display: contents;
+  font-size: 32px;
+  color: #777;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.rating-form-field .stars-container span.checked mat-icon {
+  color: #69f0ae;
+}
+
+/* Description */
+.descr-card {
+  margin-top: 20px;
+  background-color: #69f0ae;
+  padding: 18px;
+}
+
+.descr-title {
+  padding-bottom: 8px;
+}
+
+/* Submit and reset buttons */
+.actions-btn-container {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0 13px 0;
+}
+
+#submit-button[disabled] {
+  background-color: #f35154;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+#buttons-spacer {
+  width: 20px;
+}

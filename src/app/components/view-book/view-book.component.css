@@ -5,6 +5,7 @@
 }
 
 .book-card {
+  flex: 1;
   max-width: 800px;
   background-color: #d1c4e9; /* Light Purple */
 }
@@ -30,4 +31,12 @@
   margin-top: 20px;
   background-color: #69f0ae;
   padding: 18px;
+}
+
+.url-button {
+  margin-top: 8px;
+}
+
+.details {
+  font-size: medium;
 }
