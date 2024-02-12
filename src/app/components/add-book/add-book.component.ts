@@ -80,7 +80,6 @@ export class AddBookComponent implements OnInit {
   constructor(
     private bookService: BookStorageService,
     private snackBar: MatSnackBar,
-    private elementRef: ElementRef,
   ) {
     this.maxDate = new Date();
   }
