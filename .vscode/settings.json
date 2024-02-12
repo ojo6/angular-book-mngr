@@ -5,5 +5,9 @@
     },
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "html.format.wrapAttributes": "preserve",
+    "prettier.htmlWhitespaceSensitivity": "strict",
+    "prettier.endOfLine": "auto",
+    "prettier.printWidth": 120
 }

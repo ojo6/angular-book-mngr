@@ -7,7 +7,6 @@
 
     <mat-card-content>
       <div class="details">
-        <button (click)="onClick()">log validity</button>
         <!-- Title -->
         <form
           #formElement
@@ -163,44 +162,45 @@
           </div>
 
           <!-- Description -->
+          <button type="button" (click)="onClick()">log validity</button>
+
           <mat-card-content class="descr-card">
             <mat-card-title class="descr-title">Description</mat-card-title>
-            <!-- <editor
-              apiKey="vplln08t7v2xxcw6r2nu3gdebhjchuevrpeywp68efb5fq14"
-              [formControl]="bookForm.controls.description"
-              (onInit)="handleEditorInit($event)"
-              [init]="{
-                base_url: '/tinymce',
-                suffix: '.min',
-                plugins: 'lists link image table code help wordcount',
-                min_height: 150,
-                menubar: false,
-                placeholder: 'Description of the book'
-              }"
-            ></editor> -->
-            <div class="mat-form-field-subscript-wrapper">
-              <mat-error
-                *ngIf="bookForm.get('description')?.hasError('minlength')"
-              >
-                Your post exceeds exceeds the character limit
-                {{
-                  bookForm.get("description")?.getError("minlength")
-                    .actualLength
-                }}
-                /
-                {{
-                  bookForm.get("description")?.getError("minlength")
-                    .requiredLength
-                }}
-              </mat-error>
-              <!-- <mat-error
-                *ngIf="
-                  bookForm.controls.description.touched &&
-                  bookForm.controls.description.hasError('required')
-                "
-              >
-                This form is required
-              </mat-error> -->
+            <div class="mat-form-field-wrapper">
+              <editor
+                apiKey="vplln08t7v2xxcw6r2nu3gdebhjchuevrpeywp68efb5fq14"
+                [formControl]="$any(bookForm.get('description'))"
+                outputFormat="html"
+                (onInit)="handleEditorInit($event)"
+                [init]="{
+                  base_url: '/tinymce',
+                  suffix: '.min',
+                  plugins: 'lists link code help wordcount',
+                  min_height: 150,
+                  placeholder: 'Form description content'
+                }"
+              ></editor>
+              <div class="mat-form-field-subscript-wrapper">
+                @if (bookForm.get("description")?.errors?.["minWordCount"]) {
+                  <mat-error>
+                    The description must be at least 50 words long.
+                    {{
+                      bookForm.get("description")?.errors?.["minWordCount"]
+                        .actualLength
+                    }}
+                    /
+                    {{
+                      bookForm.get("description")?.errors?.["minWordCount"]
+                        .requiredLength
+                    }}
+                  </mat-error>
+                }
+                @if (bookForm.get("description")?.errors?.["required"]) {
+                  <mat-error>
+                    {{ getFieldRequiredMessage }}
+                  </mat-error>
+                }
+              </div>
             </div>
           </mat-card-content>
 
@@ -217,8 +217,8 @@
               Submit
             </button>
             <div id="buttons-spacer"></div>
-            <button mat-raised-button type="reset">Reset</button></span
-          >
+            <button mat-raised-button type="reset">Reset</button>
+          </span>
         </form>
       </div>
     </mat-card-content>

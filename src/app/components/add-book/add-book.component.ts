@@ -6,7 +6,9 @@ import { BookStorageService } from '../../services/book-storage.service';
 import { dateValidator } from '../../validators/date.validator';
 import { integerValidator } from '../../validators/positive-integer.validator';
 import { urlValidator } from '../../validators/url-format.validator';
+import { minWordCount } from '../../validators/min-wordcount.validator';
 
+const MIN_DESCR_WORDCOUNT = 50;
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -16,66 +18,39 @@ export class AddBookComponent implements OnInit {
   // for resetting the red invalid borders of the input fields after submit
   @ViewChild('formElement') bookFormElement!: ElementRef;
 
-  // TODO create an empty object ? and reuse the same logic for the edit book
-  // book : IBook = {
-
-  // }
-
+  //TODO set accesors
   private editorSubject: Subject<any> = new AsyncSubject();
   maxDate: Date;
   selectedRating: number = 0;
   authors: string[] = [];
   filteredAuthors!: Observable<string[]>;
 
-  bookForm: FormGroup = this.createFormGroup();
+  // TODO create an empty object ? and reuse the same logic for the edit book
+  // book : IBook = {
 
-  createFormGroup(): FormGroup {
-    return new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      author: new FormControl('', [Validators.required]),
-      rating: new FormControl(0),
-      bookWebsiteUrl: new FormControl<string | null>(null, [urlValidator()]),
-      numberOfPages: new FormControl(null, [
-        Validators.required,
-        Validators.min(1),
-      ]),
-      totalNumber: new FormControl<number | null>(null, [
-        Validators.required,
-        Validators.min(0),
-        integerValidator(),
-      ]),
-      printDate: new FormControl<Date | null>(null, dateValidator()),
-      description: new FormControl('', [
-        // Validators.required,
-        // minlength(this.editorSubject, 10),
-      ]),
-    });
-  }
+  // }
 
-  // TODO remove when done
-  logRequiredFields(formGroup: FormGroup) {
-    this.bookFormElement.nativeElement.dispatchEvent(new Event('reset'));
-
-    formGroup.get('description');
-    Object.keys(formGroup.controls).forEach((field) => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        console.log('Field:', field);
-        console.log('errors: ', control.errors);
-        console.log('dirty: ', control.dirty);
-        control.updateValueAndValidity();
-        console.log('Validity Status:', control.status); // Log the validity status
-        console.log('Control Value:', control.value);
-        console.log('Control Touched:', control.touched);
-      } else if (control instanceof FormGroup) {
-        this.logRequiredFields(control);
-      }
-    });
-  }
-
-  onClick() {
-    this.logRequiredFields(this.bookForm);
-  }
+  public bookForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    author: new FormControl('', [Validators.required]),
+    rating: new FormControl(0),
+    bookWebsiteUrl: new FormControl<string | null>(null, [urlValidator()]),
+    numberOfPages: new FormControl(null, [
+      Validators.required,
+      Validators.min(1),
+    ]),
+    totalNumber: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(0),
+      integerValidator(),
+    ]),
+    printDate: new FormControl<Date | null>(null, dateValidator()),
+    description: new FormControl<string | null>(
+      null,
+      Validators.required,
+      minWordCount(this.editorSubject, MIN_DESCR_WORDCOUNT),
+    ),
+  });
 
   constructor(
     private bookService: BookStorageService,
@@ -119,7 +94,6 @@ export class AddBookComponent implements OnInit {
 
   protected onSubmit() {
     console.log('submit called');
-    // let f  = this.bookForm.value as
     if (this.bookForm.valid) {
       const formData = this.bookForm.value;
       this.bookService.saveBookForm(formData).subscribe(
@@ -140,11 +114,10 @@ export class AddBookComponent implements OnInit {
     }
   }
 
-  //Rich text editor logic
+  // Tinymce init
   handleEditorInit(e: any) {
     this.editorSubject.next(e.editor);
     this.editorSubject.complete();
-    console.log('editor init');
   }
 
   protected get getFieldRequiredMessage(): string {
@@ -153,5 +126,30 @@ export class AddBookComponent implements OnInit {
 
   openSnackBar(message: string) {
     this.snackBar.open(message, '', { duration: 3000 });
+  }
+
+  // TODO remove when done
+  logRequiredFields(formGroup: FormGroup) {
+    console.log(this.bookForm.get('body')!.value);
+    console.log(formGroup.get('body')?.errors);
+    console.log(this.bookForm.get('body')?.getError('minWordCount'));
+    // Object.keys(formGroup.controls).forEach((field) => {
+    //   const control = formGroup.get(field);
+    //   if (control instanceof FormControl) {
+    //     console.log('Field:', field);
+    //     console.log('errors: ', control.errors);
+    //     console.log('dirty: ', control.dirty);
+    //     control.updateValueAndValidity();
+    //     console.log('Validity Status:', control.status); // Log the validity status
+    //     console.log('Control Value:', control.value);
+    //     console.log('Control Touched:', control.touched);
+    //   } else if (control instanceof FormGroup) {
+    //     this.logRequiredFields(control);
+    //   }
+    // });
+  }
+
+  onClick() {
+    this.logRequiredFields(this.bookForm);
   }
 }
