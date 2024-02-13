@@ -1,18 +1,8 @@
-import { CSP_NONCE, Injectable, booleanAttribute } from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  ReplaySubject,
-  concatMap,
-  from,
-  map,
-  of,
-  switchMap,
-  toArray,
-} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, concatMap, from, map, of, toArray } from 'rxjs';
+import { IAuthor } from '../interfaces/author.interface';
 import { IBook } from '../interfaces/book-interface';
 import { BOOKS } from '../mock-books';
-import { IAuthor } from '../interfaces/author.interface';
 
 export const STORE_KEY_VALUE: string = 'myBookList';
 @Injectable({
@@ -47,7 +37,10 @@ export class BookStorageService {
     localStorage.setItem(id.toString(), JSON.stringify(value));
   }
 
-  saveBookForm(bookFormData: any, id: number | null): Observable<number> {
+  public saveBookForm(
+    bookFormData: any,
+    id: number | null,
+  ): Observable<number> {
     const saveId: number = id ? Number(id) : this.generateId();
     const newBook: IBook = {
       id: saveId,
@@ -116,12 +109,22 @@ export class BookStorageService {
   }
 
   private clearBookAuthor(id: number) {
+    this.replaceAuthorNameSigleBook(id, '');
+  }
+
+  public replaceAuthorNameSigleBook(id: number, newValue: string) {
     this.getBook(id).subscribe((value) => {
       let book = value;
-      book.author = '';
+      book.author = newValue;
       this.saveBook(book.id, book);
-      console.log('selected book to clear', book);
     });
+  }
+
+  public updateAuthorName(author: IAuthor, newName: string) {
+    for (let id of author.bookIds) {
+      this.replaceAuthorNameSigleBook(id, newName);
+    }
+    this.setAuthorsBooks();
   }
 
   // some initial "previously saved" books

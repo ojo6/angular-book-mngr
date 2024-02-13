@@ -44,9 +44,9 @@
             <td mat-cell *matCellDef="let element">
               <button
                 mat-icon-button
-                matTooltip="Edit this book"
+                matTooltip="Edit this author name"
                 color="accent"
-                (click)="goToEdit(element.author)"
+                (click)="openEditDialog(element)"
               >
                 <mat-icon>edit</mat-icon>
               </button>

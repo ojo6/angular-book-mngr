@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Edit the name of author</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Author name</mat-label>
+    <input matInput [(ngModel)]="data.authorName" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="data.authorName"
+  >
+    Confirm
+  </button></mat-dialog-actions
+>

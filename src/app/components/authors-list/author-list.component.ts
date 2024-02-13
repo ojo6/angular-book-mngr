@@ -1,8 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { IAuthor } from '../../interfaces/author.interface';
 import { BookStorageService } from '../../services/book-storage.service';
 import { needConfirmation } from '../../confirm-dialog.decorator';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { InputDialogComponent } from '../input-dialog/input-dialog.component';
 
 @Component({
   selector: 'app-author-list',
@@ -12,8 +22,10 @@ import { needConfirmation } from '../../confirm-dialog.decorator';
 export class AuthorListComponent {
   authorsBooks: { [Name: string]: number[] } = {};
   authorsTableData: IAuthor[] = [];
-
-  constructor(private bookService: BookStorageService) {}
+  constructor(
+    private bookService: BookStorageService,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.loadAuthors();
@@ -33,8 +45,6 @@ export class AuthorListComponent {
     for (const [author, books] of Object.entries(authorsData)) {
       this.authorsTableData.push({ name: author, bookIds: books });
     }
-    console.log(authorsData);
-    console.log(this.authorsTableData);
   }
 
   @needConfirmation({
@@ -45,10 +55,18 @@ export class AuthorListComponent {
   protected removeAuthor(author: IAuthor) {
     this.bookService.removeAuthor(author);
     this.loadAuthors();
-    console.log('table data after delete', this.authorsTableData);
   }
 
-  goToEdit(arg0: any) {
-    console.log('Method not implemented.', arg0);
+  openEditDialog(author: IAuthor): void {
+    const dialogRef = this.dialog.open(InputDialogComponent, {
+      data: { authorName: author.name },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result !== author.name) {
+        this.bookService.updateAuthorName(author, result);
+      }
+      this.loadAuthors();
+    });
   }
 }

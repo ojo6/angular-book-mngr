@@ -24,10 +24,11 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { initializeDialogService } from '../main';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthorListComponent } from './components/authors-list/author-list.component';
 import { BookFormComponent } from './components/book-form/book-form.component';
 import { BookListComponent } from './components/book-list/book-list.component';
+import { InputDialogComponent } from './components/input-dialog/input-dialog.component';
 import { ViewBookComponent } from './components/view-book/view-book.component';
-import { AuthorListComponent } from './components/authors-list/author-list.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { AuthorListComponent } from './components/authors-list/author-list.compo
     MatNativeDateModule,
     EditorModule,
     MatRadioModule,
+    MatDialogModule
   ],
   declarations: [
     AppComponent,
@@ -57,6 +59,7 @@ import { AuthorListComponent } from './components/authors-list/author-list.compo
     BookFormComponent,
     ViewBookComponent,
     AuthorListComponent,
+    InputDialogComponent,
   ],
   providers: [
     importProvidersFrom(MatDialogModule),
@@ -67,6 +70,7 @@ import { AuthorListComponent } from './components/authors-list/author-list.compo
       multi: true,
     },
     provideAnimations(),
+    
   ],
   bootstrap: [AppComponent],
 })
