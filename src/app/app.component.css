@@ -5,6 +5,11 @@
   gap: 5px;
 }
 
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+/* 
 .title-container {
   padding: 9px;
   background: aquamarine;
@@ -14,4 +19,4 @@
 
 .toolbar-spacer {
   flex: 1 1 auto;
-}
+} */

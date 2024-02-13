@@ -26,26 +26,6 @@
   align-items: center;
 }
 
-.view-icon {
-  color: wheat;
-}
-
 .spacer {
   height: 20px;
-}
-
-.action-button {
-  margin: 3px;
-}
-
-.no-books-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: large;
-}
-
-.main-actions {
-  margin-top: 10px;
-  background-color: #9d55bbf2;
 }

@@ -1,4 +1,4 @@
-import { IBook } from './book-interface';
+import { IBook } from './interfaces/book-interface';
 
 export const BOOKS: IBook[] = [
   {
@@ -84,5 +84,42 @@ export const BOOKS: IBook[] = [
     numberOfPages: 12,
     printDate: new Date('January 1, 1972'),
     totalNumberOfBooks: 5,
+  },
+  {
+    id: 17,
+    name: 'Franny and Zooey',
+    description: `<p><strong>Franny and Zooey</strong> is a book by J.D. Salinger. It comprises two novellas about the members of the Glass family. The first story, "Franny," follows Franny Glass as she struggles with existential questions during a weekend visit to her boyfriend's college. The second story, "Zooey," focuses on Franny's brother Zooey, who tries to offer her guidance and comfort.</p>
+    <p>Salinger's signature introspective style and complex characterizations shine in this exploration of spirituality and familial relationships.</p>`,
+    author: 'J.D. Salinger',
+    rating: 4,
+    bookWebsiteUrl: 'https://en.wikipedia.org/wiki/Franny_and_Zooey',
+    numberOfPages: 201,
+    printDate: new Date('September 1961'),
+    totalNumberOfBooks: 8,
+  },
+  {
+    id: 18,
+    name: 'Homage to Catalonia',
+    description: `<p><strong>Homage to Catalonia</strong> is George Orwell's personal account of his experiences and observations during the Spanish Civil War. Orwell provides a candid depiction of the complexities and contradictions within the Republican faction, offering insights into the political climate and the struggles faced by those fighting against fascism.</p>
+    <p>This memoir reflects Orwell's commitment to truth-telling and his unwavering support for democratic ideals, making it a compelling read for those interested in history and political activism.</p>`,
+    author: 'George Orwell',
+    rating: 4,
+    bookWebsiteUrl: 'https://en.wikipedia.org/wiki/Homage_to_Catalonia',
+    numberOfPages: 288,
+    printDate: new Date('April 25, 1938'),
+    totalNumberOfBooks: 15,
+  },
+  {
+    id: 19,
+    name: 'Down and Out in Paris and London',
+    description: `<p><strong>Down and Out in Paris and London</strong> is a memoir by George Orwell. It recounts Orwell's experiences of poverty and homelessness in both cities during the late 1920s.</p>
+    <p>The book provides a raw and honest portrayal of the struggles faced by the working class, shedding light on the harsh realities of life on the margins of society.</p>`,
+    author: 'George Orwell',
+    rating: 4,
+    bookWebsiteUrl:
+      'https://en.wikipedia.org/wiki/Down_and_Out_in_Paris_and_London',
+    numberOfPages: 218,
+    printDate: new Date('January 9, 1933'),
+    totalNumberOfBooks: 10,
   },
 ];

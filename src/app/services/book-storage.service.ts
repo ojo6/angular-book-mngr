@@ -1,17 +1,30 @@
-import { Injectable } from '@angular/core';
-import { Observable, concatMap, from, map, of, switchMap, toArray } from 'rxjs';
-import { IBook } from '../book-interface';
+import { CSP_NONCE, Injectable, booleanAttribute } from '@angular/core';
+import {
+  BehaviorSubject,
+  Observable,
+  ReplaySubject,
+  concatMap,
+  from,
+  map,
+  of,
+  switchMap,
+  toArray,
+} from 'rxjs';
+import { IBook } from '../interfaces/book-interface';
 import { BOOKS } from '../mock-books';
+import { IAuthor } from '../interfaces/author.interface';
 
 export const STORE_KEY_VALUE: string = 'myBookList';
 @Injectable({
   providedIn: 'root',
 })
 export class BookStorageService {
-  public idsSaved: number[] = [];
+  private idsSaved: number[] = [];
+  protected authorsBooks: { [Name: string]: number[] } = {};
 
   constructor() {
     this.saveInitialData(); // to have data from the start
+    this.setAuthorsBooks();
   }
 
   public getBooks(): Observable<IBook> {
@@ -58,6 +71,7 @@ export class BookStorageService {
     localStorage.removeItem(key);
     this.idsSaved = this.idsSaved.filter((ind) => ind !== id);
     console.log('idsSaved aftrer delete', this.idsSaved);
+    this.setAuthorsBooks();
   }
 
   public getAuthors(): Observable<string[]> {
@@ -68,8 +82,46 @@ export class BookStorageService {
     );
   }
 
+  public setAuthorsBooks() {
+    let authorsBooks: { [Name: string]: number[] } = {};
+    for (let id of this.idsSaved) {
+      const key = id.toString();
+      const book: any = localStorage.getItem(key);
+      const parsedBook: IBook = JSON.parse(book);
+
+      if (parsedBook.author !== '') {
+        // store the book ids for each author, to remove them upon deletion of an author
+        authorsBooks[parsedBook.author] = authorsBooks[parsedBook.author]
+          ? [...authorsBooks[parsedBook.author], id]
+          : [id];
+      }
+    }
+    console.log('setter, ', authorsBooks);
+    this.authorsBooks = authorsBooks;
+  }
+
+  get getAuthorsBooks() {
+    return this.authorsBooks;
+  }
+
   private generateId(): number {
     return Math.floor(Math.random() * 80) + 20;
+  }
+
+  public removeAuthor(author: IAuthor) {
+    for (let id of author.bookIds) {
+      this.clearBookAuthor(id);
+    }
+    this.setAuthorsBooks();
+  }
+
+  private clearBookAuthor(id: number) {
+    this.getBook(id).subscribe((value) => {
+      let book = value;
+      book.author = '';
+      this.saveBook(book.id, book);
+      console.log('selected book to clear', book);
+    });
   }
 
   // some initial "previously saved" books

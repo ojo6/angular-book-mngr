@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AsyncSubject, Observable, Subject, map, startWith } from 'rxjs';
-import { IBook } from '../../book-interface';
+import { IBook } from '../../interfaces/book-interface';
 import { BookStorageService } from '../../services/book-storage.service';
 import { dateValidator } from '../../validators/date.validator';
 import { minWordCount } from '../../validators/min-wordcount.validator';
@@ -116,7 +116,7 @@ export class BookFormComponent implements OnInit {
 
   private loadAuthors(): void {
     this.bookService.getAuthors().subscribe((authors) => {
-      this.authors = authors;
+      this.authors = authors.filter((el) => el !== '');
     });
   }
 

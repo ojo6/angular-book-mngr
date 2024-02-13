@@ -27,6 +27,7 @@ import { AppComponent } from './app.component';
 import { BookFormComponent } from './components/book-form/book-form.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { ViewBookComponent } from './components/view-book/view-book.component';
+import { AuthorListComponent } from './components/authors-list/author-list.component';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { ViewBookComponent } from './components/view-book/view-book.component';
     BookListComponent,
     BookFormComponent,
     ViewBookComponent,
+    AuthorListComponent,
   ],
   providers: [
     importProvidersFrom(MatDialogModule),

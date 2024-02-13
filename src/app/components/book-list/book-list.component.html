@@ -1,8 +1,4 @@
-<div *ngIf="books.length == 0" class="no-books-message">
-  you don't have any books<mat-icon> sentiment_very_dissatisfied </mat-icon>
-</div>
-
-<div class="container" *ngIf="books.length > 0">
+<div class="container">
   <mat-card class="header-card">
     <mat-card-content>
       <mat-card-title>List of books in storage</mat-card-title>
@@ -11,23 +7,18 @@
         storage</mat-card-subtitle
       >
     </mat-card-content>
-
-    <button
-      class="add-button"
-      (click)="goToAdd()"
-      mat-raised-button
-      color="accent"
-      matTooltip="Add a new book"
-    >
-      Add new entry
-    </button>
   </mat-card>
 
   <div class="spacer"></div>
 
   <mat-card class="table-card" color="accent">
     <mat-card-content>
-      <div class="table-container">
+      <div *ngIf="books.length == 0" class="no-books-message">
+        you don't have any books<mat-icon>
+          sentiment_very_dissatisfied
+        </mat-icon>
+      </div>
+      <div *ngIf="books.length > 0" class="table-container">
         <table mat-table [dataSource]="books" class="table">
           <!-- Position Column -->
           <ng-container matColumnDef="position">
@@ -133,5 +124,27 @@
         </table>
       </div>
     </mat-card-content>
+  </mat-card>
+  <mat-card class="main-actions">
+    <mat-card-actions align="end">
+      <button
+        class="action-button"
+        (click)="goToAdd()"
+        mat-raised-button
+        color="accent"
+        matTooltip="Add a new book"
+      >
+        Add new entry
+      </button>
+      <button
+        class="action-button"
+        (click)="goToAuthors()"
+        mat-raised-button
+        color="accent"
+        matTooltip="Edit authors list"
+      >
+        Manage authors
+      </button>
+    </mat-card-actions>
   </mat-card>
 </div>

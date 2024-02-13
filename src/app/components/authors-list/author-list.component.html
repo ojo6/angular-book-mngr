@@ -1,0 +1,77 @@
+<div class="container">
+  <mat-card class="header-card">
+    <mat-card-content>
+      <mat-card-title>List of authors</mat-card-title>
+      <mat-card-subtitle
+        >Here you can see the authors whose books you have in
+        storage</mat-card-subtitle
+      >
+    </mat-card-content>
+  </mat-card>
+
+  <div class="spacer"></div>
+  <mat-card class="table-card" color="accent">
+    <mat-card-content>
+      <div class="table-container">
+        <table mat-table [dataSource]="authorsTableData" class="table">
+          <!-- Position -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>Position</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{ i + 1 }}
+            </td>
+          </ng-container>
+
+          <!-- Author -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.name }}
+            </td>
+          </ng-container>
+
+          <!-- number of books -->
+          <ng-container matColumnDef="totalNumberOfBooks">
+            <th mat-header-cell *matHeaderCellDef>Stored books</th>
+            <td mat-cell align="center" *matCellDef="let element">
+              {{ element.bookIds.length }}
+            </td>
+          </ng-container>
+
+          <!-- Edit book entry on click -->
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>Edit</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                matTooltip="Edit this book"
+                color="accent"
+                (click)="goToEdit(element.author)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Delete book entry on click -->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                matTooltip="Remove author"
+                color="warn"
+                (click)="removeAuthor(element)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

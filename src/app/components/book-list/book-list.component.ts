@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { IBook } from '../../book-interface';
 import { Router } from '@angular/router';
 import { needConfirmation } from '../../confirm-dialog.decorator';
+import { IBook } from '../../interfaces/book-interface';
 import { BookStorageService } from '../../services/book-storage.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DialogCloseOptions } from '@angular/cdk/dialog';
+import { ConfirmDialogData } from '../confirm-dialog/confirm-dialog-data';
 
 @Component({
   selector: 'app-book-list',
@@ -13,7 +16,7 @@ export class BookListComponent {
   books: IBook[] = [];
 
   constructor(
-    private bookStorageService: BookStorageService,
+    private bookService: BookStorageService,
     private router: Router,
   ) {}
 
@@ -34,7 +37,7 @@ export class BookListComponent {
   ];
 
   public getBooks() {
-    this.bookStorageService.getBooks().subscribe((book) => {
+    this.bookService.getBooks().subscribe((book) => {
       this.books.push(book);
     });
   }
@@ -52,10 +55,17 @@ export class BookListComponent {
     this.router.navigate(['/add-book']);
   }
 
-  @needConfirmation()
+  protected goToAuthors() {
+    this.router.navigate(['/authors']);
+  }
+
+  @needConfirmation({
+    title: 'Delete book',
+    message: 'Are you sure you want to delete this book?',
+  })
   protected deleteBookEntry(id: number) {
     console.log('Deleting book', id);
-    this.bookStorageService.deleteBook(id);
+    this.bookService.deleteBook(id);
     this.books = [];
     this.getBooks();
   }

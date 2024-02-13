@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IBook } from '../../book-interface';
+import { IBook } from '../../interfaces/book-interface';
 import { BookStorageService } from '../../services/book-storage.service';
 
 @Component({
@@ -23,7 +23,6 @@ export class ViewBookComponent implements OnInit {
     this.bookService.getBook(id).subscribe({
       next: (value) => {
         this.book = value;
-        console.log('next:', value);
       },
       error: (err) => console.log('error:', err),
     });
