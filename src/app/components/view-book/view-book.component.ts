@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { IBook } from '../../book-interface';
 import { BookStorageService } from '../../services/book-storage.service';
-
 
 @Component({
   selector: 'app-view-book',
@@ -13,10 +11,7 @@ export class ViewBookComponent implements OnInit {
   book!: IBook;
   @Input() id = '';
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly bookStorageService: BookStorageService,
-  ) {}
+  constructor(private readonly bookService: BookStorageService) {}
 
   ngOnInit(): void {
     if (this.id) {
@@ -25,7 +20,7 @@ export class ViewBookComponent implements OnInit {
   }
 
   public setSelectedBookId(id: number) {
-    this.bookStorageService.getBook(id).subscribe({
+    this.bookService.getBook(id).subscribe({
       next: (value) => {
         this.book = value;
         console.log('next:', value);

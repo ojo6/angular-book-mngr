@@ -8,14 +8,14 @@ export const STORE_KEY_VALUE: string = 'myBookList';
   providedIn: 'root',
 })
 export class BookStorageService {
-  public indeces: number[] = [];
+  public idsSaved: number[] = [];
 
   constructor() {
     this.saveInitialData(); // to have data from the start
   }
 
   public getBooks(): Observable<IBook> {
-    return from(this.indeces).pipe(concatMap((id) => this.getBook(id)));
+    return from(this.idsSaved).pipe(concatMap((id) => this.getBook(id)));
   }
 
   public getBook(id: number): Observable<IBook> {
@@ -27,15 +27,17 @@ export class BookStorageService {
 
   // store individual book
   public saveBook(id: number, value: IBook) {
-    const key = id.toString();
-    localStorage.setItem(key, JSON.stringify(value));
-    this.indeces.push(id);
+    if (!this.idsSaved.includes(id)) {
+      this.idsSaved.push(id);
+    }
+
+    localStorage.setItem(id.toString(), JSON.stringify(value));
   }
 
-  saveBookForm(bookFormData: any): Observable<number> {
-    const newId: number = this.generateId();
+  saveBookForm(bookFormData: any, id: number | null): Observable<number> {
+    const saveId: number = id ? Number(id) : this.generateId();
     const newBook: IBook = {
-      id: newId,
+      id: saveId,
       name: bookFormData.name,
       description: bookFormData.description,
       author: bookFormData.author,
@@ -45,17 +47,17 @@ export class BookStorageService {
       printDate: bookFormData.printDate,
       totalNumberOfBooks: bookFormData.totalNumber,
     };
-
-    this.saveBook(newId, newBook);
-    return of(newId);
+    console.log('earlier:', typeof saveId);
+    this.saveBook(saveId, newBook);
+    return of(saveId);
   }
 
   public deleteBook(id: number) {
     console.log('deleting book :', id);
     const key = id.toString();
     localStorage.removeItem(key);
-    this.indeces = this.indeces.filter((ind) => ind !== id);
-    console.log('indeces aftrer delete', this.indeces);
+    this.idsSaved = this.idsSaved.filter((ind) => ind !== id);
+    console.log('idsSaved aftrer delete', this.idsSaved);
   }
 
   public getAuthors(): Observable<string[]> {

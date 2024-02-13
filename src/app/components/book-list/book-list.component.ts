@@ -48,7 +48,7 @@ export class BookListComponent {
     this.router.navigate(['/edit-book/' + id.toString()]);
   }
 
-  goToAdd() {
+  protected goToAdd() {
     this.router.navigate(['/add-book']);
   }
 
@@ -58,6 +58,5 @@ export class BookListComponent {
     this.bookStorageService.deleteBook(id);
     this.books = [];
     this.getBooks();
-    console.log('this ar ethe books', this.books);
   }
 }

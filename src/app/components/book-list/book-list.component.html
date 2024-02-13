@@ -54,7 +54,9 @@
           <!-- Rating Column -->
           <ng-container matColumnDef="rating">
             <th mat-header-cell *matHeaderCellDef>Rating</th>
-            <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.rating ? element.rating : "-" }}
+            </td>
           </ng-container>
 
           <!-- Number of Pages Column -->

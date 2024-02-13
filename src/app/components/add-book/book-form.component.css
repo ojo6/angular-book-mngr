@@ -23,7 +23,9 @@ form {
 .mat-mdc-card-title {
   color: #512da8;
 }
-
+.mat-mdc-form-field-wrapper {
+  flex: 1;
+}
 /* RATING */
 
 .rating-form-field {
@@ -75,6 +77,10 @@ form {
   justify-content: center;
   padding: 15px 0 13px 0;
 }
+
+.mat-mdc-form-field-subscript-wrapper {
+  height: 8px;
+} 
 
 #submit-button[disabled] {
   background-color: #f35154;

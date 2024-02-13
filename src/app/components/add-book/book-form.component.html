@@ -1,8 +1,8 @@
 <div class="container">
   <mat-card class="book-card">
     <mat-card-header>
-      <mat-card-title>Add a new book</mat-card-title>
-      <mat-card-subtitle>Fill in the details and click SAVE</mat-card-subtitle>
+      <mat-card-title>{{ pageTitle }}</mat-card-title>
+      <mat-card-subtitle>{{ pageSubtitle }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -162,11 +162,9 @@
           </div>
 
           <!-- Description -->
-          <button type="button" (click)="onClick()">log validity</button>
-
-          <mat-card-content class="descr-card">
+          <mat-card class="descr-card">
             <mat-card-title class="descr-title">Description</mat-card-title>
-            <div class="mat-form-field-wrapper">
+            <div class="mat-mdc-form-field-wrapper">
               <editor
                 apiKey="vplln08t7v2xxcw6r2nu3gdebhjchuevrpeywp68efb5fq14"
                 [formControl]="$any(bookForm.get('description'))"
@@ -180,7 +178,8 @@
                   placeholder: 'Form description content'
                 }"
               ></editor>
-              <div class="mat-form-field-subscript-wrapper">
+              <div class="mat-mdc-form-field-subscript-wrapper"></div>
+              <div class="mat-mdc-form-field-subscript-wrapper">
                 @if (bookForm.get("description")?.errors?.["minWordCount"]) {
                   <mat-error>
                     The description must be at least 50 words long.
@@ -195,14 +194,17 @@
                     }}
                   </mat-error>
                 }
-                @if (bookForm.get("description")?.errors?.["required"]) {
+                @if (
+                  bookForm.get("description")?.errors?.["required"] &&
+                  bookForm.get("description")?.touched
+                ) {
                   <mat-error>
                     {{ getFieldRequiredMessage }}
                   </mat-error>
                 }
               </div>
             </div>
-          </mat-card-content>
+          </mat-card>
 
           <!-- Form actions -->
           <span class="actions-btn-container">

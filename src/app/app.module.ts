@@ -24,9 +24,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { initializeDialogService } from '../main';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddBookComponent } from './components/add-book/add-book.component';
+import { BookFormComponent } from './components/add-book/book-form.component';
 import { BookListComponent } from './components/book-list/book-list.component';
-import { EditBookComponent } from './components/edit-book/edit-book.component';
 import { ViewBookComponent } from './components/view-book/view-book.component';
 
 @NgModule({
@@ -54,9 +53,8 @@ import { ViewBookComponent } from './components/view-book/view-book.component';
   declarations: [
     AppComponent,
     BookListComponent,
-    AddBookComponent,
+    BookFormComponent,
     ViewBookComponent,
-    EditBookComponent,
   ],
   providers: [
     importProvidersFrom(MatDialogModule),
