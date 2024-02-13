@@ -24,7 +24,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { initializeDialogService } from '../main';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BookFormComponent } from './components/add-book/book-form.component';
+import { BookFormComponent } from './components/book-form/book-form.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { ViewBookComponent } from './components/view-book/view-book.component';
 
